@@ -1,0 +1,28 @@
+{
+    "name": "Nox.Mods.Table",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "Nox.CCK",
+        "Nox.Tables",
+        "Nox.Worlds",
+        "Nox.Search",
+        "Nox.Network",
+        "Nox.Users",
+        "Nox.CCK.Worlds",
+        "Nox.UI",
+        "Unity.ScriptableBuildPipeline",
+        "Nox.Instances",
+        "Nox.CCK.Network",
+        "Nox.Table.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

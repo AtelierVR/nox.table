@@ -1,0 +1,56 @@
+{
+  "type": "mod",
+  "id": "nox.table",
+  "provides": [
+    "table"
+  ],
+  "name": "Table",
+  "version": "1.0.0",
+  "description": "Provides the table system for the game.",
+  "license": "GPL-3.0",
+  "icon": null,
+  "contact": {
+    "email": "hactazia@gmail.com",
+    "source": "https://github.com/AtelierVR/nox.table",
+    "website": "https://nox.hactazia.fr/",
+    "issues": "https://github.com/AtelierVR/nox.table/issues"
+  },
+  "authors": [
+    {
+      "name": "Hactazia",
+      "email": "hactazia@gmail.com",
+      "website": "https://hactazia.fr/"
+    }
+  ],
+  "contributors": [],
+  "relations": [
+    {
+      "id": "network",
+      "type": "depends",
+      "version": ">=1.0.0"
+    },
+    {
+      "id": "ui",
+      "type": "recommends",
+      "version": ">=1.0.0"
+    },
+    {
+      "id": "search",
+      "type": "recommends",
+      "version": ">=1.0.0"
+    }
+  ],
+  "entrypoints": {
+    "main": [
+      "Nox.Table.Runtime.Main"
+    ]
+  },
+  "references": [],
+  "permissions": [
+    "file",
+    "file.read",
+    "file.write",
+    "config",
+    "config.global"
+  ]
+}
