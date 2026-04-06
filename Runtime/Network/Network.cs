@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Nox.CCK.Network;
@@ -37,7 +38,7 @@ namespace Nox.Table.Runtime {
 				return null;
 			}
 
-			var request = await RequestNode.To(address, $"/api/users/@me/tables?key={key}");
+			var request = await RequestNode.To(address, $"/users/@me/tables/{Uri.EscapeDataString(key)}");
 			if (request == null) {
 				Logger.LogError($"Failed to find {address} for table {key}");
 				return null;
@@ -66,7 +67,7 @@ namespace Nox.Table.Runtime {
 				return null;
 			}
 
-			var request = await RequestNode.To(address, $"/api/users/@me/tables?key={key}");
+			var request = await RequestNode.To(address, $"/users/@me/tables/{Uri.EscapeDataString(key)}");
 			if (request == null) {
 				Logger.LogError($"Failed to find {address} for table {key}");
 				return null;
@@ -97,7 +98,7 @@ namespace Nox.Table.Runtime {
 				return null;
 			}
 
-			var request = await RequestNode.To(address, $"/api/users/@me/tables?key={key}");
+			var request = await RequestNode.To(address, $"/users/@me/tables/{Uri.EscapeDataString(key)}");
 			if (request == null) {
 				Logger.LogError($"Failed to find {address} for table {key}");
 				return null;
