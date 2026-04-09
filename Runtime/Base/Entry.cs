@@ -1,29 +1,22 @@
-using Cysharp.Threading.Tasks;
+using System.Text;
 using Nox.CCK.Utils;
 using Nox.Tables;
 
 namespace Nox.Table.Runtime {
-	public class Entry : IEntry, INoxObject {
-		public string Server;
-		public string Key;
-		public string Value;
+	public class Entry : IEntry {
+		public Entry(string key, byte[] value, string mime, Identifier user) {
+			Key     = key;
+			AsBytes = value;
+			Mime    = mime;
+			User    = user;
+		}
 
-		public string GetServerAddress()
-			=> Server;
+		public Identifier User { get; }
+		public string Key { get; }
+		public string Mime { get; }
+		public byte[] AsBytes { get; }
 
-		public string GetKey()
-			=> Key;
-
-		public string GetValue()
-			=> Value;
-
-		public async UniTask<IEntry> Refresh()
-			=> await Main.Instance.Network.Get(Key, Server);
-
-		public async UniTask<IEntry> Update(string v)
-			=> await Main.Instance.Network.Set(Key, v, Server);
-
-		public UniTask Delete()
-			=> Main.Instance.Network.Delete(Key, Server);
+		public string AsString
+			=> Encoding.UTF8.GetString(AsBytes);
 	}
 }

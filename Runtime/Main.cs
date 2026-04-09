@@ -1,10 +1,6 @@
-using System.Linq;
-using Nox.Table.Runtime;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Nox.CCK.Mods.Cores;
 using Nox.CCK.Mods.Initializers;
-using Nox.CCK.Utils;
 using Nox.Network;
 using Nox.Tables;
 using Nox.Users;
@@ -14,15 +10,15 @@ namespace Nox.Table.Runtime {
 	public class Main : IMainModInitializer, ITableAPI {
 		#region Variables
 
-		internal static Main       Instance;
+		static internal Main       Instance;
 		internal        IModCoreAPI CoreAPI;
 
-		internal static INetworkAPI NetworkAPI
+		static internal INetworkAPI NetworkAPI
 			=> Instance.CoreAPI.ModAPI
 				.GetMod("network")
 				?.GetInstance<INetworkAPI>();
 
-		internal static IUserAPI UserAPI
+		static internal IUserAPI UserAPI
 			=> Instance.CoreAPI.ModAPI
 				.GetMod("users")
 				?.GetInstance<IUserAPI>();
@@ -46,16 +42,16 @@ namespace Nox.Table.Runtime {
 
 		#endregion
 
-		[NoxPublic(NoxAccess.Method)]
-		public async UniTask<IEntry> Get(string key, string from = null)
-			=> await Network.Get(key, from);
+		public async UniTask<IEntry> Get(string key)
+			=> await Network.Get(key);
 
-		[NoxPublic(NoxAccess.Method)]
-		public async UniTask<IEntry> Set(string key, string value, string from = null)
-			=> await Network.Set(key, value, from);
+		public async UniTask<IEntry> Set(string key, byte[] value, string mime = "application/octet-stream")
+			=> await Network.Set(key, value);
+		
+		public async UniTask<IEntry> Set(string key, string value, string mime = "text/plain")
+			=> await Network.Set(key, value);
 
-		[NoxPublic(NoxAccess.Method)]
-		public async UniTask<IEntry> Delete(string key, string from = null)
-			=> await Network.Delete(key, from);
+		public async UniTask<bool> Delete(string key)
+			=> await Network.Delete(key);
 	}
 }

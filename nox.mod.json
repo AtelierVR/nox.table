@@ -2,7 +2,7 @@
   "type": "mod",
   "id": "nox.table",
   "provides": [
-    "table"
+    "tables"
   ],
   "name": "Table",
   "version": "1.0.0",

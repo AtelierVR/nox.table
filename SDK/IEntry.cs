@@ -1,42 +1,30 @@
-using Cysharp.Threading.Tasks;
+using Nox.CCK.Utils;
 
 namespace Nox.Tables {
+	/// <summary>
+	/// Represents an entry in the table.
+	/// </summary>
 	public interface IEntry {
 		/// <summary>
-		/// Gets the server address where the entry is stored.
+		/// Gets the user who owns the entry.
 		/// </summary>
-		/// <returns></returns>
-		public string GetServerAddress();
+		public Identifier User { get; }
 
 		/// <summary>
 		/// Gets the key.
 		/// </summary>
 		/// <returns></returns>
-		public string GetKey();
+		public string Key { get; }
 
 		/// <summary>
 		/// Gets the value.
 		/// </summary>
 		/// <returns></returns>
-		public string GetValue();
+		public byte[] AsBytes { get; }
 
 		/// <summary>
-		/// Refreshes the table data.
+		/// Gets the value as a string.
 		/// </summary>
-		/// <returns></returns>
-		public UniTask<IEntry> Refresh();
-
-		/// <summary>
-		/// Updates the table with a new value.
-		/// </summary>
-		/// <param name="value"></param>
-		/// <returns></returns>
-		public UniTask<IEntry> Update(string value);
-
-		/// <summary>
-		/// Deletes the table entry.
-		/// </summary>
-		/// <returns></returns>
-		public UniTask Delete();
+		public string AsString { get; }
 	}
 }
