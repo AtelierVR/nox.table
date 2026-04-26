@@ -40,5 +40,13 @@ namespace Nox.Tables {
 		/// <param name="key"></param>
 		/// <returns></returns>
 		public UniTask<bool> Delete(string key);
+
+		/// <summary>
+		/// Lists of Tables entries for the current user.
+		/// </summary>
+		/// <param name="offset"></param>
+		/// <param name="limit"></param>
+		/// <returns></returns>
+		public UniTask<IEntryReferenceList> List(uint offset = 0, uint limit = 50);
 	}
 }

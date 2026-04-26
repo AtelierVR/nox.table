@@ -1,10 +1,11 @@
+using System;
 using Nox.CCK.Utils;
 
 namespace Nox.Tables {
 	/// <summary>
-	/// Represents an entry in the table.
+	/// Represents a reference to an entry in the table.
 	/// </summary>
-	public interface IEntry {
+	public interface IEntryReference {
 		/// <summary>
 		/// Gets the user who owns the entry.
 		/// </summary>
@@ -22,14 +23,18 @@ namespace Nox.Tables {
 		public string Mime { get; }
 
 		/// <summary>
-		/// Gets the value.
+		/// Gets the hash of the value.
 		/// </summary>
-		/// <returns></returns>
-		public byte[] AsBytes { get; }
+		public byte[] Hash { get; }
 
 		/// <summary>
-		/// Gets the value as a string.
+		/// Datetime of the last update of the entry.
 		/// </summary>
-		public string AsString { get; }
+		public DateTime UpdatedAt { get; }
+
+		/// <summary>
+		/// Datetime of the creation of the entry.
+		/// </summary>
+		public DateTime CreatedAt { get; }
 	}
 }

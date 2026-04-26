@@ -53,5 +53,8 @@ namespace Nox.Table.Runtime {
 
 		public async UniTask<bool> Delete(string key)
 			=> await Network.Delete(key);
+		
+		public async UniTask<IEntryReferenceList> List(uint offset = 0, uint limit = 50)
+			=> await Network.List(offset, limit);
 	}
 }

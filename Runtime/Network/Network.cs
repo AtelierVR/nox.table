@@ -34,6 +34,33 @@ namespace Nox.Table.Runtime {
 			Main.Instance.CoreAPI.EventAPI.Emit("table_delete", key, user);
 		}
 
+		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, CancellationToken cancellationToken = default) {
+			var user = Main.UserAPI?.Current;
+			if (user == null) {
+				Logger.LogError($"Cannot list tables: no user provided.");
+				return null;
+			}
+
+			var request = await RequestNode.To(user.Server, $"/users/@me/tables?offset={offset}&limit={limit}");
+			if (request == null) {
+				Logger.LogError($"Failed to find {user.Server} for listing tables");
+				return null;
+			}
+
+			await request.Send(cancellationToken);
+			var response = await request.Node<EntryReferenceList>(cancellationToken);
+			if (response.HasError()) {
+				Logger.LogError(new Exception($"Failed to fetch entry reference list", new Exception(response.Error.Message)));
+				return null;
+			}
+
+			var entries = response.Data;
+			foreach (var entry in entries.Items)
+				entry.User = user.Identifier;
+			
+			return entries;
+		}
+
 		public async UniTask<Entry> Get(string key, CancellationToken cancellationToken = default) {
 
 			var user = Main.UserAPI?.Current;

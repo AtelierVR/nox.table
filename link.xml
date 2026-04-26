@@ -2,5 +2,5 @@
 <linker>
 	<assembly fullname="Nox.Mods.Table" preserve="all" />
 	<assembly fullname="Nox.Table.Runtime" preserve="all" />
-	<assembly fullname="Nox.Worlds" preserve="all" />
+	<assembly fullname="Nox.Tables" preserve="all" />
 </linker>
