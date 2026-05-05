@@ -1,7 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Nox.CCK.Mods.Cores;
 using Nox.CCK.Mods.Initializers;
+using Nox.CCK.Scripting;
 using Nox.Network;
+using Nox.Scripting;
+using Nox.Table.Runtime.Modules;
 using Nox.Tables;
 using Nox.Users;
 using IEntry = Nox.Tables.IEntry;
@@ -33,9 +36,17 @@ namespace Nox.Table.Runtime {
 			CoreAPI  = api;
 			Instance = this;
 			Network  = new Network();
+
+			TablesModule.TableAPI = this;
+			var scripting = api.ModAPI.GetMod("scripting")?.GetInstance<IScriptingAPI>();
+			scripting?.RegisterModule(TablesModule.Module);
 		}
 
 		public void OnDispose() {
+			var scripting = CoreAPI?.ModAPI.GetMod("scripting")?.GetInstance<IScriptingAPI>();
+			scripting?.UnregisterModule(new NameResolver("tables"));
+
+			TablesModule.TableAPI = null;
 			CoreAPI  = null;
 			Instance = null;
 		}

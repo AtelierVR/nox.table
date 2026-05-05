@@ -13,7 +13,11 @@
         "Nox.UI",
         "Unity.ScriptableBuildPipeline",
         "Nox.Instances",
-        "Nox.CCK.Network"
+        "Nox.CCK.Network",
+        "Nox.Sessions",
+        "Nox.Entities",
+        "Nox.Scripting",
+        "Nox.CCK.Scripting"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
