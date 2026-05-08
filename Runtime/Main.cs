@@ -44,7 +44,7 @@ namespace Nox.Table.Runtime {
 
 		public void OnDispose() {
 			var scripting = CoreAPI?.ModAPI.GetMod("scripting")?.GetInstance<IScriptingAPI>();
-			scripting?.UnregisterModule(new NameResolver("tables"));
+			scripting?.UnregisterModule(TablesModule.Module);
 
 			TablesModule.TableAPI = null;
 			CoreAPI  = null;
