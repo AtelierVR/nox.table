@@ -38,6 +38,11 @@
       "id": "search",
       "type": "recommends",
       "version": ">=1.0.0"
+    },
+    {
+      "id": "scripting",
+      "type": "depends",
+      "version": ">=1.0.0"
     }
   ],
   "entrypoints": {
