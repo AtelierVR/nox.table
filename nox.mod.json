@@ -22,7 +22,6 @@
       "website": "https://hactazia.fr/"
     }
   ],
-  "contributors": [],
   "relations": [
     {
       "id": "network",
@@ -50,7 +49,6 @@
       "Nox.Table.Runtime.Main"
     ]
   },
-  "references": [],
   "permissions": [
     "file",
     "file.read",
