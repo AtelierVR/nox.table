@@ -42,6 +42,17 @@
       "id": "scripting",
       "type": "depends",
       "version": ">=1.0.0"
+    },
+    {
+      "id": "users",
+      "type": "depends",
+      "version": ">=1.0.0"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "after",
+      "id": "users"
     }
   ],
   "entrypoints": {
