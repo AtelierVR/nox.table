@@ -1,5 +1,5 @@
 {
-    "name": "Nox.Tables",
+    "name": "Nox.Table",
     "rootNamespace": "",
     "references": [
         "Nox.CCK",

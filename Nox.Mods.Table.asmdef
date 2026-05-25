@@ -4,7 +4,7 @@
     "references": [
         "UniTask",
         "Nox.CCK",
-        "Nox.Tables",
+        "Nox.Table",
         "Nox.Worlds",
         "Nox.Search",
         "Nox.Network",

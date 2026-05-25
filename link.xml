@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
 	<assembly fullname="Nox.Mods.Table" preserve="all" />
+	<assembly fullname="Nox.Table" preserve="all" />
 	<assembly fullname="Nox.Table.Runtime" preserve="all" />
-	<assembly fullname="Nox.Tables" preserve="all" />
 </linker>

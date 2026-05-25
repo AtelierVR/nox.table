@@ -1,5 +1,6 @@
 {
   "name": "nox.table",
   "displayName": "Nox - Table",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "description": "Structured data table system for in-game UI and content."
 }

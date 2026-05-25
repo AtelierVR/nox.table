@@ -6,7 +6,7 @@
   ],
   "name": "Table",
   "version": "1.0.0",
-  "description": "Provides the table system for the game.",
+  "description": "Structured data table system for in-game UI and content.",
   "license": "GPL-3.0",
   "icon": null,
   "contact": {
