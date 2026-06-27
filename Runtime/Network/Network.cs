@@ -1,11 +1,12 @@
 using System;
+using System.Data;
 using System.Text;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Nox.CCK.Network;
 using Nox.CCK.Utils;
-using Nox.Users;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 using Logger = Nox.CCK.Utils.Logger;
 
 namespace Nox.Table.Runtime {
@@ -32,6 +33,13 @@ namespace Nox.Table.Runtime {
 		private void InvokeDelete(string key, Identifier user) {
 			_deleteEvent.Invoke(key, user);
 			Main.Instance.CoreAPI.EventAPI.Emit("table_delete", key, user);
+		}
+
+		private static DateTime ParseHeaderDate(UnityWebRequest request, string name, DateTime fallback) {
+			var header = request.GetRequestHeader(name);
+			if (!string.IsNullOrEmpty(header) && DateTime.TryParse(header, out var dt))
+				return dt;
+			return fallback;
 		}
 
 		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, CancellationToken cancellationToken = default) {
@@ -82,11 +90,16 @@ namespace Nox.Table.Runtime {
 				return null;
 			}
 			
+			var updatedAt = ParseHeaderDate(request, "Last-Modified", DateTime.UtcNow);
+			var createdAt = ParseHeaderDate(request, "Date", updatedAt);
+
 			var response = new Entry(
 				key: key,
 				await request.Data(token: cancellationToken),
 				mime: request.GetRequestHeader("Content-Type") ?? "application/octet-stream",
-				user.Identifier
+				user.Identifier,
+				updatedAt: updatedAt,
+				createdAt: createdAt
 			);
 
 			InvokeGet(response);
@@ -127,7 +140,17 @@ namespace Nox.Table.Runtime {
 				return null;
 			}
 
-			var response = new Entry(key, value, mime, user.Identifier);
+			var updatedAt = ParseHeaderDate(request, "Last-Modified", DateTime.UtcNow);
+			var createdAt = ParseHeaderDate(request, "Date", updatedAt);
+			
+			var response = new Entry(
+				key,
+				value,
+				mime,
+				user.Identifier,
+				updatedAt: updatedAt,
+				createdAt: createdAt
+			);
 
 			InvokeSet(response);
 			return response;

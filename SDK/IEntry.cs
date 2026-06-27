@@ -1,3 +1,4 @@
+using System;
 using Nox.CCK.Utils;
 
 namespace Nox.Tables {
@@ -20,6 +21,16 @@ namespace Nox.Tables {
 		/// Gets the MIME type of the value.
 		/// </summary>
 		public string Mime { get; }
+
+		/// <summary>
+		/// Gets the last modification time (UTC).
+		/// </summary>
+		public DateTime UpdatedAt { get; }
+
+		/// <summary>
+		/// Gets the creation time (UTC).
+		/// </summary>
+		public DateTime CreatedAt { get; }
 
 		/// <summary>
 		/// Gets the value.
