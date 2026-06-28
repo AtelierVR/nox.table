@@ -31,7 +31,7 @@ namespace Nox.Table.Runtime.Modules {
 			if (session?.Dimensions == null) { key = null; return false; }
 			var id = session.Dimensions.Identifier;
 			if (!id.IsValid()) { key = null; return false; }
-			key = $"{(isPublic ? "public." : "")}worlds.{Uri.EscapeDataString(id.ToShortString(true))}";
+			key = $"{(isPublic ? "public." : "")}worlds.{id.ToShortString()}";
 			return true;
 		}
 
