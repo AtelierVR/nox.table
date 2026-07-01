@@ -131,8 +131,7 @@ namespace Nox.Table.Runtime {
 				Logger.LogError($"Failed to find {user.Server} for table {key}");
 				return null;
 			}
-			request.SetRequestHeader("Content-Type", mime);
-			request.SetBody(value);
+			request.SetBody(value, mime);
 			request.method = RequestExtension.Method.POST;
 			await request.Send(cancellationToken);
 			if (!request.Ok()) {

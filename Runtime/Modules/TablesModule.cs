@@ -4,6 +4,7 @@ using Nox.CCK.Scripting;
 using Nox.Scripting;
 using Nox.Sessions;
 using Nox.Tables;
+using Nox.Users;
 
 namespace Nox.Table.Runtime.Modules {
 	/// <summary>
@@ -31,7 +32,9 @@ namespace Nox.Table.Runtime.Modules {
 			if (session?.Dimensions == null) { key = null; return false; }
 			var id = session.Dimensions.Identifier;
 			if (!id.IsValid()) { key = null; return false; }
-			key = $"{(isPublic ? "public." : "")}worlds.{id.ToShortString()}";
+			var userServer = Main.UserAPI?.Current?.Identifier.Server;
+			var sameServer = id.IsLocal() || (userServer != null && id.Server == userServer);
+			key = $"{(isPublic ? "public." : "")}worlds.{id.ToShortString(withServer: !sameServer)}";
 			return true;
 		}
 

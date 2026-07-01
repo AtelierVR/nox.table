@@ -57,10 +57,10 @@ namespace Nox.Table.Runtime {
 			=> await Network.Get(key);
 
 		public async UniTask<IEntry> Set(string key, byte[] value, string mime = "application/octet-stream")
-			=> await Network.Set(key, value);
+			=> await Network.Set(key, value, mime);
 		
 		public async UniTask<IEntry> Set(string key, string value, string mime = "text/plain")
-			=> await Network.Set(key, value);
+			=> await Network.Set(key, value, mime);
 
 		public async UniTask<bool> Delete(string key)
 			=> await Network.Delete(key);
