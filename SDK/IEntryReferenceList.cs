@@ -1,6 +1,4 @@
-using System;
 using Cysharp.Threading.Tasks;
-using Nox.CCK.Utils;
 
 namespace Nox.Tables
 {

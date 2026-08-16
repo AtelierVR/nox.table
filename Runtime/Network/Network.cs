@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using System.Text;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -63,8 +62,11 @@ namespace Nox.Table.Runtime {
 			}
 
 			var entries = response.Data;
-			foreach (var entry in entries.Items)
+			entries.Local = false;
+			foreach (var entry in entries.Items){
 				entry.User = user.Identifier;
+				entry.Local = false;
+			}
 			
 			return entries;
 		}
@@ -99,7 +101,8 @@ namespace Nox.Table.Runtime {
 				mime: request.GetRequestHeader("Content-Type") ?? "application/octet-stream",
 				user.Identifier,
 				updatedAt: updatedAt,
-				createdAt: createdAt
+				createdAt: createdAt,
+				local: false
 			);
 
 			InvokeGet(response);
@@ -148,7 +151,8 @@ namespace Nox.Table.Runtime {
 				mime,
 				user.Identifier,
 				updatedAt: updatedAt,
-				createdAt: createdAt
+				createdAt: createdAt,
+				local: false
 			);
 
 			InvokeSet(response);

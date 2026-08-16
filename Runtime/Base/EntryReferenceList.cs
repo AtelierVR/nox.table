@@ -10,16 +10,19 @@ namespace Nox.Table.Runtime
     public class EntryReferenceList : IEntryReferenceList
     {
         [JsonProperty("total")]
-        public uint Total { get; private set; }
+        public uint Total { get; internal set; }
 
         [JsonProperty("offset")]
-        public uint Offset { get; private set; }
+        public uint Offset { get; internal set; }
 
         [JsonProperty("limit")]
-        public uint Limit { get; private set; }
+        public uint Limit { get; internal set; }
 
         [JsonProperty("items")]
-        public EntryReference[] Items { get; private set; }
+        public EntryReference[] Items { get; internal set; }
+
+        [JsonIgnore]
+        public bool Local { get; internal set; }
 
         IEntryReference[] IEntryReferenceList.Items
             => Items.ToArray<IEntryReference>();
@@ -32,7 +35,7 @@ namespace Nox.Table.Runtime
 
         public UniTask<EntryReferenceList> Next()
             => HasNext()
-                ? Main.Instance.Network.List(Offset + Limit, Limit)
+                ? Main.Instance.List(Offset + Limit, Limit, Local)
                 : default;
 
         async UniTask<IEntryReferenceList> IEntryReferenceList.Next()
@@ -40,7 +43,7 @@ namespace Nox.Table.Runtime
 
         public UniTask<EntryReferenceList> Previous()
             => HasPrevious()
-                ? Main.Instance.Network.List(Offset - Limit, Limit)
+                ? Main.Instance.List(Offset - Limit, Limit, Local)
                 : default;
 
         async UniTask<IEntryReferenceList> IEntryReferenceList.Previous()

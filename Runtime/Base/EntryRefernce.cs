@@ -10,18 +10,21 @@ namespace Nox.Table.Runtime {
 		public Identifier User { get; internal set; }
 
         [JsonProperty("key")]
-		public string Key { get; private set; }
+		public string Key { get; internal set; }
 
         [JsonProperty("mime")]
-		public string Mime { get; private set; }
+		public string Mime { get; internal set; }
 
         [JsonProperty("hash", ItemConverterType = typeof(HexaToBytes))]
-		public byte[] Hash { get; private set; }
+		public byte[] Hash { get; internal set; }
 
         [JsonProperty("updated_at", ItemConverterType = typeof(UnixTimestampToDateTime))]
-        public DateTime UpdatedAt { get; private set; }
+        public DateTime UpdatedAt { get; internal set; }
 
         [JsonProperty("created_at", ItemConverterType = typeof(UnixTimestampToDateTime))]
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; internal set; }
+
+        [JsonIgnore]
+        public bool Local { get; internal set; }
     }
 }
