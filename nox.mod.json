@@ -5,7 +5,7 @@
     "tables"
   ],
   "name": "Table",
-  "version": "1.0.0",
+  "version": "1.0.x",
   "description": "Structured data table system for in-game UI and content.",
   "license": "GPL-3.0",
   "icon": null,
