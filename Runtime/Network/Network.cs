@@ -87,10 +87,8 @@ namespace Nox.Table.Runtime {
 			}
 
 			await request.Send(cancellationToken);
-			if (!request.Ok()) {
-				Logger.LogError($"Failed to get table {key} from {user.Server}");
+			if (!request.Ok()) 
 				return null;
-			}
 			
 			var updatedAt = ParseHeaderDate(request, "Last-Modified", DateTime.UtcNow);
 			var createdAt = ParseHeaderDate(request, "Date", updatedAt);
