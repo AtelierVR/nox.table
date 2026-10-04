@@ -51,7 +51,8 @@ namespace Nox.Tables {
 		/// <param name="offset"></param>
 		/// <param name="limit"></param>
 		/// <param name="local">When <c>true</c>, list from the local filesystem backend.</param>
+		/// <param name="filter">Optional glob pattern matched against the entry keys (e.g. <c>*favorites.worlds*</c>).</param>
 		/// <returns></returns>
-		public UniTask<IEntryReferenceList> List(uint offset = 0, uint limit = 50, bool local = false);
+		public UniTask<IEntryReferenceList> List(uint offset = 0, uint limit = 50, bool local = false, string filter = null);
 	}
 }

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using System.Text.RegularExpressions;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Nox.CCK.Utils;
@@ -187,11 +187,12 @@ namespace Nox.Table.Runtime {
 			}
 		}
 
-		public UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50) {
+		public UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, string filter = null) {
 			try {
 				var entries = Directory.GetFiles(_root)
 					.Select(ReadMeta)
 					.Where(x => x != null)
+					.Where(x => MatchFilter(x.Key, filter))
 					.Select(x => new EntryReference {
 						User      = CurrentUser,
 						Key       = x.Key,
@@ -219,6 +220,13 @@ namespace Nox.Table.Runtime {
 				Logger.LogError($"Failed to list local tables: {e.Message}");
 				return UniTask.FromResult<EntryReferenceList>(null);
 			}
+		}
+
+		private static bool MatchFilter(string key, string filter) {
+			if (string.IsNullOrEmpty(filter) || filter == "*")
+				return true;
+			var pattern = "^" + Regex.Escape(filter).Replace("\\*", ".*").Replace("\\?", ".") + "$";
+			return Regex.IsMatch(key ?? string.Empty, pattern, RegexOptions.IgnoreCase);
 		}
 
 		#region File read helpers

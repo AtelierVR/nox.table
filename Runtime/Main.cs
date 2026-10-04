@@ -76,12 +76,12 @@ namespace Nox.Table.Runtime {
 			? await Local.Delete(key) 
 			: await Network.Delete(key);
 		
-		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, bool local = false)
+		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, bool local = false, string filter = null)
 			=> local 
-			? await Local.List(offset, limit) 
-			: await Network.List(offset, limit);
+				? await Local.List(offset, limit, filter) 
+				: await Network.List(offset, limit, filter);
 
-		async UniTask<IEntryReferenceList> ITableAPI.List(uint offset = 0, uint limit = 50, bool local = false)
-			=> await List(offset, limit, local);
+		async UniTask<IEntryReferenceList> ITableAPI.List(uint offset = 0, uint limit = 50, bool local = false, string filter = null)
+			=> await List(offset, limit, local, filter);
 	}
 }

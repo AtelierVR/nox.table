@@ -41,14 +41,18 @@ namespace Nox.Table.Runtime {
 			return fallback;
 		}
 
-		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, CancellationToken cancellationToken = default) {
+		public async UniTask<EntryReferenceList> List(uint offset = 0, uint limit = 50, string filter = null, CancellationToken cancellationToken = default) {
 			var user = Main.UserAPI?.Current;
 			if (user == null) {
 				Logger.LogError($"Cannot list tables: no user provided.");
 				return null;
 			}
 
-			var request = await RequestNode.To(user.Server, $"/users/@me/tables?offset={offset}&limit={limit}");
+			var query = $"/users/@me/tables?offset={offset}&limit={limit}";
+			if (!string.IsNullOrEmpty(filter))
+				query += $"&filter={UnityWebRequest.EscapeURL(filter)}";
+
+			var request = await RequestNode.To(user.Server, query);
 			if (request == null) {
 				Logger.LogError($"Failed to find {user.Server} for listing tables");
 				return null;
