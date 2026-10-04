@@ -18,10 +18,12 @@ namespace Nox.Table.Runtime {
         [JsonProperty("hash", ItemConverterType = typeof(HexaToBytes))]
 		public byte[] Hash { get; internal set; }
 
-        [JsonProperty("updated_at", ItemConverterType = typeof(UnixTimestampToDateTime))]
+        [JsonProperty("updated_at")]
+        [JsonConverter(typeof(UnixTimestampToDateTime))]
         public DateTime UpdatedAt { get; internal set; }
 
-        [JsonProperty("created_at", ItemConverterType = typeof(UnixTimestampToDateTime))]
+        [JsonProperty("created_at")]
+        [JsonConverter(typeof(UnixTimestampToDateTime))]
         public DateTime CreatedAt { get; internal set; }
 
         [JsonIgnore]
