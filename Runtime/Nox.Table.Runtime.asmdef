@@ -1,7 +1,8 @@
-{
+﻿{
     "name": "Nox.Table.Runtime",
     "rootNamespace": "",
     "references": [
+        "Nox.CCK.Assets",
         "Nox.CCK",
         "UniTask",
         "Nox.Table",

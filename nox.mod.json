@@ -29,7 +29,7 @@
       "register": "git+https://github.com/AtelierVR/nox.scripting.git"
     },
     {
-      "id": "session",
+      "id": "sessions",
       "type": "depends",
       "register": "git+https://github.com/AtelierVR/nox.sessions.git"
     },
